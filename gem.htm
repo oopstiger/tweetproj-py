@@ -1,0 +1,66 @@
+<html>
+<head>
+  %s
+  <title>TweetProj TaskTracker</title>
+  <style type="text/css">
+    body {
+      font-family: "Calibri";
+      margin: 1em;
+    }
+    .crt {
+      color: #555;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    .key {
+      color: #0080d0;
+      padding-right: 1em;
+    }
+    .value {
+      color: #0080d0;
+    }
+    .attention {
+      color: #ff0080;
+    }
+  </style>
+  <script type="text/javascript">
+    function stop_task() {
+      if (confirm("Are you sure to stop the task?")) {
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("POST", "/ctl/stop", false);
+        var now = new Date()
+        xmlHttp.send(now.toString());
+        location.reload()
+      }
+    }
+
+    var output = document.getElementById('output');
+    output.scrollTop = output.scrollHeight;
+  </script>
+</head>
+<body>
+  <h3>Task Summary</h3>
+  <table>
+    <tbody>
+      <tr><td class="key">Process ID</td><td class="value">%d</td></tr>
+      <tr><td class="key">Command Line</td><td class="value">%s</td></tr>
+      <tr><td class="key">Started At</td><td class="value">%s</td></tr>
+      <tr><td class="key">Updated At</td><td class="value">%s</td></tr>
+      <tr><td class="key">Files Processed</td><td class="value">%d</td></tr>
+      <tr><td class="key">Records Processed</td><td class="value">%d</td></tr>
+      <tr><td class="key">Bytes(Uncompressed)</td><td class="value">%s</td></tr>
+      <tr><td class="key">Current File</td><td class="value">%s</td></tr>
+      <tr><td class="key">Current Progress</td><td class="value"><progress value="%d" max="%d"/></td></tr>
+      <tr><td class="key">Status</td><td class="value">%s</td></tr>
+    </tbody>
+  </table>
+  <button class="btn attention" onclick="javascript: stop_task()">STOP</button>
+  <h3>Task Log</h3>
+  <textarea rows="24" cols="110" readonly class="crt" id="output">%s</textarea><br />
+  <p>To view full log, see %s</p>
+</body>
+</html>

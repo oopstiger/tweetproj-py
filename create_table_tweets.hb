@@ -1,0 +1,11 @@
+create 'tweets',
+  'idstr',
+  'text',
+  'created_at',
+  'source',
+  'geo',
+  'truncated',
+  'comments_count',
+  'reposts_count',
+  'user',
+  'rt'

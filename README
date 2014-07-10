@@ -1,0 +1,21 @@
+tweet_import -- 新浪微博数据导入工具
+
+tweet_import.py 用于导入微博状态数据(weibo_datas\SinaNormalRobot\Statuses)
+
+Usage:
+	tweet_import.py <ThriftServer[:Port=9090]> <Source> [TrackerPort=10086]
+ThriftServer 参数设置为目标HBase Thrift Server的地址, 端口号默认为9090
+Source 参数设置为需要导入的数据路径. 此路径可以是.txt/.rar文件的路径, 也可以是包含.txt/.rar文件的目录.
+    注意!! tweet_import.py 不会递归的搜索目录, 仅处理目录下的文件.
+TrackerPort 参数设置Web控制台端口, 默认端口为10086.
+    注意!! 机器上启动多个tweet_import.py时需要设置不同的TrackerPort
+
+    tweet_import.py 不使用标准输入输出, 日志默认输出至 log/gem.PID.log 文件.
+
+    tweet_import.py 已经处理过的文件将被记录于 log/PID.done 文件, 启动任
+务时tweet_import.py检查 log/ignores 文件, 忽略被记录的文件. 重启被中断的任务前, 将
+PID.done文件中的内容添加至ignores文件即可
+
+    tweet_import.py 提供一个Web界面的控制台(默认端口号为10086), 可以查看数据导入的
+进度和日志, 也可以中止导入. http://127.0.0.1:10086/ (远程访问时使用外部IP地址). 导
+入结束后控制台不再可用.
